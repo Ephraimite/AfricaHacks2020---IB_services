@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appartment_type"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ui.FragmentAppartmentType">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+
+                android:gravity="center"
+                android:text="Select your appartment type"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textAllCaps="true"
+                />
+
+            <RadioGroup
+                android:id="@+id/radioGroup_house_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+
+                    <RadioButton
+                        android:id="@+id/construction_residential"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Constrution Clean Outs: Residential" />
+                    <RadioButton
+                        android:id="@+id/construction_commercial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Constrution Clean-Outs: Commercial" />
+                    <RadioButton
+                        android:id="@+id/commercial_cleaning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Commercial Cleaning" />
+                    <RadioButton
+                        android:id="@+id/residential_cleaning"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Residential Cleaning" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Select the number of rooms you have"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                />
+
+            <RadioGroup
+                android:id="@+id/radioGroup_house_rooms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+
+                    <RadioButton
+                        android:id="@+id/bedroom_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="5 Bedroom " />
+                    <RadioButton
+                        android:id="@+id/bedroom_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="4  Bedroom " />
+                    />
+                    <RadioButton
+                        android:id="@+id/bedroom_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="3 Bedroom " />
+                    />
+                    <RadioButton
+                        android:id="@+id/bedroom_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="2 Bedroom " />
+                    />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/appartment_type_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="135dp"
+                android:layout_marginTop="5dp"
+                android:text="Proceed"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

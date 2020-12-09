@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">IB services</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="reset_password">reset password</string>
+    <string name="sign_up">signup</string>
+    <string name="sign_up_here">Dont have an account?</string>
+    <string name="email">Email</string>
+    <string name="login">login</string>
+    <string name="password">password</string>
+
+    <string-array name="select_cars">
+        <item>select your number of cars</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>
