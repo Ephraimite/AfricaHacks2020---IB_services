@@ -16,13 +16,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.ibservices.Api.VonageSmsApi;
+import com.example.ibservices.ApiClient.SmsClient;
 import com.example.ibservices.Data.CleaningInfoParcel;
+import com.example.ibservices.Data.Message;
+import com.example.ibservices.Data.SmsResponse;
 import com.example.ibservices.R;
-import com.example.ibservices.Utils.Constants;
-import com.vonage.client.VonageClient;
-import com.vonage.client.sms.SmsSubmissionResponse;
-import com.vonage.client.sms.SmsSubmissionResponseMessage;
-import com.vonage.client.sms.messages.TextMessage;
+import com.google.gson.JsonArray;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static com.example.ibservices.Utils.Constants.DATE;
 import static com.example.ibservices.Utils.Constants.HOUSE_TYPE;
@@ -36,14 +44,20 @@ import static com.example.ibservices.Utils.Constants.TIME;
  */
 public class FragmentPaymentType extends Fragment {
 
-    private static final String FROM_NUMBER = "IB services";
+    private String FROM = "IB services";
+    private String TO = "";
+    public String MESSAGE =  "Thank you for choosing IB services..." + " " + "your order has been recorded, " +
+            "our representative will get in touch shortly";
+    public String API_KEY = "9638fb73";
+    public String SECRET_KEY = "e9P0XjIdc3lGsQuu";
+
     Button proceed_pay;
     RadioGroup radioGroup;
     RadioButton pay_card, pay_after_service;
 
     TextView tv_name, tv_email, tv_phone, tv_location, tv_time, tv_service_type,
             tv_date, tv_special_requirement, tv_house_type, tv_noOf_roooms;
-    private String phone;
+
 
     public FragmentPaymentType() {
         // Required empty public constructor
@@ -89,7 +103,7 @@ public class FragmentPaymentType extends Fragment {
             assert cleaningInfoParcel != null;
             String name = cleaningInfoParcel.getName();
             String email = cleaningInfoParcel.getEmail();
-            phone = cleaningInfoParcel.getPhone();
+            TO = cleaningInfoParcel.getPhone();
             String location = cleaningInfoParcel.getLocation();
             String special_requirement = cleaningInfoParcel.getSpecial_requirement();
 
@@ -97,7 +111,7 @@ public class FragmentPaymentType extends Fragment {
             tv_service_type.setText(service);
             tv_name.setText(name);
             tv_email.setText(email);
-            tv_phone.setText(phone);
+            tv_phone.setText(TO);
             tv_date.setText(date);
             tv_location.setText(location);
             tv_time.setText(t);
@@ -115,24 +129,32 @@ public class FragmentPaymentType extends Fragment {
             Toast.makeText(getContext(), "Payment Method Called", Toast.LENGTH_LONG).show();
         } else if (ID == R.id.rb_payAfterService) {
 
-            sendSmsNotificationToUser(phone);
-        }
+            sendSmsNotificationToUser( API_KEY, TO, FROM, MESSAGE,SECRET_KEY); }
 
     }
 
-    private void sendSmsNotificationToUser(String phone) {
+    private void sendSmsNotificationToUser(String apiKey, String secret_key, String from, String to, String message ) {
+        Retrofit retrofit = SmsClient.getRetrofitInstance();
+        VonageSmsApi vonageSmsAp  = retrofit.create(VonageSmsApi.class);
+        Call<SmsResponse> call = vonageSmsAp.sendSmsOrderConfirmation(apiKey,secret_key,from,to,message);
 
-        VonageClient client = VonageClient.builder()
-                .apiKey(Constants.API_KEY)
-                .apiSecret(Constants.SECRET_KEY)
-                .build();
+        call.enqueue(new Callback<SmsResponse>() {
+            @Override
+            public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
+                if (response.body() !=null){
 
-        SmsSubmissionResponse responses = client.getSmsClient().submitMessage(new TextMessage(
-                FROM_NUMBER,
-                phone,
-                "Hello from IB services! thanks for booking an appointment with us"));
-        for (SmsSubmissionResponseMessage response : responses.getMessages()) {
-            System.out.println(response);
-        }
+                    List<Message> message = response.body().getMessages();
+                    String status = String.valueOf(message);
+
+                    Toast.makeText(getContext(), status, Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SmsResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

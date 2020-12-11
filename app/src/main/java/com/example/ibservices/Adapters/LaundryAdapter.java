@@ -56,7 +56,7 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryV
         }
     }
 
-    public class LaundryViewHolder extends RecyclerView.ViewHolder {
+    public static class LaundryViewHolder extends RecyclerView.ViewHolder {
         TextView tv_price, tv_cloth, noOfCloths;
         ImageView img_cloth;
         ImageButton btn_add, btn_remove;
@@ -71,6 +71,9 @@ public class LaundryAdapter extends RecyclerView.Adapter<LaundryAdapter.LaundryV
             btn_remove = itemView.findViewById(R.id.cloth_remove);
             noOfCloths = itemView.findViewById(R.id.No_of_cloth);
 
+            btn_add.setOnClickListener(v -> {
+
+            });
 
 
 
