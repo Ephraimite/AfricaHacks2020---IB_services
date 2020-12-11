@@ -1,8 +1,5 @@
 package com.example.ibservices.Data;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.firebase.firestore.DocumentId;
 
 public class LaundryModel {
@@ -11,9 +8,9 @@ public class LaundryModel {
     @DocumentId
     public String id;
     public String name, images,type;
-    public int price;
+    public Long price;
 
-    public LaundryModel(String id, String name, String images, String type, int price) {
+    public LaundryModel(String id, String name, String images, String type, Long price) {
         this.id = id;
         this.name = name;
         this.images = images;
@@ -21,7 +18,15 @@ public class LaundryModel {
         this.price = price;
     }
 
+
+
     public LaundryModel() {
+    }
+
+    public int quantitySelected = 0;
+
+    public Long totalPrice() {
+        return quantitySelected * price;
     }
 
     public String getId() {
@@ -56,11 +61,11 @@ public class LaundryModel {
         this.type = type;
     }
 
-    public int getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

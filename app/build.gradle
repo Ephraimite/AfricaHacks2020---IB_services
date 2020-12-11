@@ -54,6 +54,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 //    ****** vonage api******
-    implementation 'com.vonage:client:6.0.0'
 
 }

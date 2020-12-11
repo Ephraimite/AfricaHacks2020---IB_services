@@ -36,5 +36,7 @@ public class LaundrySummary extends Fragment {
             String allSummary = laundrySummary.getString(CLOTH_TYPE);
             summary.setText(allSummary);
         }
+
+
     }
 }

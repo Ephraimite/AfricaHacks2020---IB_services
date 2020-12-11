@@ -33,6 +33,7 @@ public class LaundryViewModel extends ViewModel implements LaundryRepository.lau
     }
 
 
+
     @Override
     public void dataAdded(List<LaundryModel> laundryModelList) {
         laundryListData.setValue(laundryModelList);

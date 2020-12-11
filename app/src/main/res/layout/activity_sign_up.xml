@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/sign_up_email"
+            android:id="@+id/sign_up_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -42,14 +42,14 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
-                    android:id="@+id/sign_up_password"
+                    android:id="@+id/sign_up_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:drawableStart="@drawable/ic_baseline_email"
                     android:drawablePadding="12dp"
                     android:hint="@string/email"
-                    android:inputType="textPassword" />
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +64,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
-            android:id="@+id/signup_name"
+            android:id="@+id/signup_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -86,7 +86,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
-            android:id="@+id/signup_phone"
+            android:id="@+id/signup_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -98,19 +98,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
     <TextView
-                android:id="@+id/dont_have_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="72dp"
-                android:layout_marginTop="20dp"
-                android:text="Already have an account?"
-                app:layout_constraintEnd_toStartOf="@+id/signup_here"
-                app:layout_constraintHorizontal_bias="0.847"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        android:id="@+id/dont_have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Already have an account?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
     <TextView
         android:id="@+id/signup_here"
@@ -124,13 +121,14 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/dont_have_account"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/dont_have_account"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintVertical_bias="1.0" />
 
     <include
         android:id="@+id/btn_signup"
-        layout="@layout/button_progress_bar"
+        layout="@layout/sign_up_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

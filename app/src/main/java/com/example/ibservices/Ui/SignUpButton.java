@@ -10,13 +10,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.ibservices.R;
 
-public class ProgressButton {
+public class SignUpButton {
     private CardView cardView;
     private ConstraintLayout constraintLayout;
     private ProgressBar progressBar;
     private TextView textView;
 
-    public ProgressButton(Context context, View view){
+    public SignUpButton(Context context, View view){
         cardView = view.findViewById(R.id.cardView);
         constraintLayout = view.findViewById(R.id.first_constriant);
         progressBar = view.findViewById(R.id.progressBar);
@@ -27,11 +27,11 @@ public class ProgressButton {
 
     public void buttonActivated(){
         progressBar.setVisibility(View.VISIBLE);
-        textView.setText("Checking Credentials.....");
+        textView.setText("Registering.....");
     }
 
     public void buttonFinished(){
         progressBar.setVisibility(View.GONE);
-        textView.setText("Login");
+        textView.setText("Register");
     }
 }

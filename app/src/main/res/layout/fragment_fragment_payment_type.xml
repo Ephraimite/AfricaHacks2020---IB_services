@@ -132,17 +132,20 @@
                 android:text="How do you want to pay?"/>
 
             <RadioGroup
+                android:id="@+id/myRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <RadioButton
+                    android:id="@+id/rb_payWithCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Pay with card"/>
 
                 <RadioButton
+                    android:id="@+id/rb_payAfterService"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pay after service"/>

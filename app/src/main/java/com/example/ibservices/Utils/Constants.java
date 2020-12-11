@@ -12,6 +12,9 @@ public class Constants {
     public static final String TOTAL_PRICE =  key("TOTAL_PRICE");
 
 
+    public static final String API_KEY = "9638fb73";
+    public static final String SECRET_KEY = "e9P0XjIdc3lGsQuu";
+
 
     private static String key(String key){
         return Constants.class.getSimpleName()+key;
