@@ -13,8 +13,8 @@ public interface VonageSmsApi {
 
 
     @FormUrlEncoded
-    @POST("sms/")
-    Call<SmsResponse> sendSmsOrderConfirmation (
+    @POST("sms/json?")
+    Call<ResponseBody> sendSmsOrderConfirmation (
             @Field("api_key") String apiKey,
             @Field("api_secret") String secret_key,
             @Field("from") String From,

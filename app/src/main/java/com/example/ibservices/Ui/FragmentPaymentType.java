@@ -2,6 +2,7 @@ package com.example.ibservices.Ui;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +23,15 @@ import com.example.ibservices.Data.CleaningInfoParcel;
 import com.example.ibservices.Data.Message;
 import com.example.ibservices.Data.SmsResponse;
 import com.example.ibservices.R;
-import com.google.gson.JsonArray;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -40,16 +47,14 @@ import static com.example.ibservices.Utils.Constants.SERVICE_TYPE;
 import static com.example.ibservices.Utils.Constants.TIME;
 
 /**
- * A simple {@link Fragment} subclass.
  */
 public class FragmentPaymentType extends Fragment {
 
-    private String FROM = "IB services";
-    private String TO = "";
-    public String MESSAGE =  "Thank you for choosing IB services..." + " " + "your order has been recorded, " +
-            "our representative will get in touch shortly";
-    public String API_KEY = "9638fb73";
-    public String SECRET_KEY = "e9P0XjIdc3lGsQuu";
+    String FROM = "IB services";
+    String TO = "";
+    String MESSAGE =  "Thank you for choosing IB services, your order has been recorded, our representative will contact you shortly";
+    String API_KEY = "9638fb73";
+    String SECRET_KEY = "e9P0XjIdc3lGsQuu";
 
     Button proceed_pay;
     RadioGroup radioGroup;
@@ -121,40 +126,51 @@ public class FragmentPaymentType extends Fragment {
 
         }
 
-        RadioGroup rg = radioGroup;
-        int ID = rg.getCheckedRadioButtonId();
+        proceed_pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        if (ID == R.id.rb_payWithCard) {
+                RadioGroup rg = radioGroup;
+                int ID = rg.getCheckedRadioButtonId();
 
-            Toast.makeText(getContext(), "Payment Method Called", Toast.LENGTH_LONG).show();
-        } else if (ID == R.id.rb_payAfterService) {
+                if (ID == R.id.rb_payWithCard) {
 
-            sendSmsNotificationToUser( API_KEY, TO, FROM, MESSAGE,SECRET_KEY); }
+                    Toast.makeText(getContext(), "Payment Method Called", Toast.LENGTH_LONG).show();
+                } else if (ID == R.id.rb_payAfterService) {
+
+                    sendSmsNotificationToUser();
+                }
+            }
+        });
+
+
 
     }
 
-    private void sendSmsNotificationToUser(String apiKey, String secret_key, String from, String to, String message ) {
+    private void sendSmsNotificationToUser() {
         Retrofit retrofit = SmsClient.getRetrofitInstance();
         VonageSmsApi vonageSmsAp  = retrofit.create(VonageSmsApi.class);
-        Call<SmsResponse> call = vonageSmsAp.sendSmsOrderConfirmation(apiKey,secret_key,from,to,message);
+        Call<ResponseBody> call = vonageSmsAp.sendSmsOrderConfirmation(API_KEY,SECRET_KEY,FROM,TO,MESSAGE);
 
-        call.enqueue(new Callback<SmsResponse>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
                 if (response.body() !=null){
 
-                    List<Message> message = response.body().getMessages();
-                    String status = String.valueOf(message);
 
-                    Toast.makeText(getContext(), status, Toast.LENGTH_LONG).show();
+                }else {
 
                 }
+
             }
 
             @Override
-            public void onFailure(Call<SmsResponse> call, Throwable t) {
-
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 }

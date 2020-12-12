@@ -54,12 +54,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signUpHere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-                finish();
-            }
+        signUpHere.setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            finish();
         });
 
 
@@ -80,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        Toast.makeText(LoginActivity.this, "Authentication failed." + task.getException(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Authentication failed." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         loginButton.buttonFinished();
                     }
 
